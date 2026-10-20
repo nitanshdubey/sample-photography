@@ -1,0 +1,247 @@
+/* src/components/Contact.css
+   ---------------------------------------------------------------
+   MAISON AUBADE: Section 7, Contact / Enquiries styles.
+   Class names match Contact.tsx exactly.
+   Mobile first: intro above the form. From 960px the two sit side
+   by side. A darkened photograph sits behind everything.
+   --------------------------------------------------------------- */
+
+/* ---------- SECTION ---------- */
+.contact {
+    overflow: hidden;
+    background: var(--color-ink);
+    color: var(--color-ivory);
+  }
+  
+  /* ---------- BACKDROP ---------- */
+  .contact__media {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .contact__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 30%;
+  }
+  
+  /* Heavy overlay keeps all text and form fields readable */
+  .contact__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(21, 20, 18, 0.9) 0%,
+      rgba(21, 20, 18, 0.82) 50%,
+      rgba(21, 20, 18, 0.94) 100%
+    );
+    pointer-events: none;
+  }
+  
+  /* ---------- LAYOUT ---------- */
+  .contact__inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  
+  /* ---------- INTRO ---------- */
+  .contact__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .contact__heading {
+    margin-top: var(--space-2);
+    max-width: 11ch;
+    font-size: var(--text-hero);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  
+  .contact__supporting {
+    max-width: 28rem;
+    margin-top: var(--space-3);
+  }
+  
+  .contact__actions {
+    margin-top: var(--space-4);
+    max-width: 100%;
+  }
+  
+  .contact__links {
+    display: grid;
+    gap: var(--space-3);
+    margin: var(--space-4) 0 0;
+    padding: 0;
+  }
+  
+  .contact__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 0.4rem; /* comfortable touch target */
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ivory);
+  }
+  
+  .contact__link svg {
+    transition: transform var(--dur-fast) var(--ease);
+  }
+  
+  .contact__link:hover svg,
+  .contact__link:focus-visible svg {
+    transform: translate(2px, -2px);
+  }
+  
+  .contact__address {
+    display: block;
+    font-size: var(--text-sm);
+    color: var(--color-stone-light);
+    overflow-wrap: anywhere; /* long email addresses never overflow */
+  }
+  
+  /* ---------- FORM ---------- */
+  .contact__form {
+    display: grid;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-3);
+    border: 1px solid var(--color-line-light);
+    background: rgba(21, 20, 18, 0.55);
+  }
+  
+  .field {
+    display: grid;
+    gap: 0.5rem;
+  }
+  
+  .field label {
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-stone-light);
+  }
+  
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 0.75rem 0;
+    font-size: 1rem; /* 16px stops iPhones zooming in on focus */
+    color: var(--color-ivory);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--color-line-light);
+    border-radius: 0;
+    transition: border-color var(--dur-fast) var(--ease);
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  
+  .field textarea {
+    resize: vertical;
+    min-height: 7rem;
+  }
+  
+  .field input:hover,
+  .field select:hover,
+  .field textarea:hover {
+    border-bottom-color: var(--color-stone-light);
+  }
+  
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--color-bronze);
+  }
+  
+  /* Keep a visible focus indicator for keyboard users */
+  .field input:focus-visible,
+  .field select:focus-visible,
+  .field textarea:focus-visible {
+    outline: 2px solid var(--color-bronze);
+    outline-offset: 4px;
+  }
+  
+  /* Dropdown arrow (the native one is removed above) */
+  .field select {
+    padding-right: 2rem;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%23b9b1a5' stroke-width='1.5'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.25rem center;
+  }
+  
+  /* Option list colours (shown by the browser on its own background) */
+  .field select option {
+    color: var(--color-ink);
+    background: var(--color-ivory);
+  }
+  
+  .contact__submit {
+    width: 100%;
+    margin-top: var(--space-1);
+  }
+  
+  .contact__submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  
+  .contact__note {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-stone-light);
+  }
+  
+  .contact__status {
+    min-height: 1.5em; /* reserves space so the form does not jump */
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-ivory);
+  }
+  
+  /* ---------- TABLET ---------- */
+  @media (min-width: 768px) {
+    .contact__form {
+      padding: var(--space-4);
+    }
+  }
+  
+  /* ---------- DESKTOP: intro and form side by side ---------- */
+  @media (min-width: 960px) {
+    .contact__inner {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+      column-gap: clamp(3rem, 2rem + 5vw, 7rem);
+      align-items: center;
+    }
+  }
+  
+  /* ---------- SMALL PHONES ---------- */
+  @media (max-width: 480px) {
+    .contact__heading {
+      font-size: clamp(2.8rem, 15vw, 3.6rem);
+      max-width: none;
+    }
+  
+    .contact__actions .btn {
+      width: 100%;
+    }
+  }
+  
+  /* ---------- REDUCED MOTION ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .contact__link svg {
+      transition: none;
+    }
+  }

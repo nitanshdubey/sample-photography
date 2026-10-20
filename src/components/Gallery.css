@@ -1,0 +1,466 @@
+/* src/components/Gallery.css
+   ---------------------------------------------------------------
+   MAISON AUBADE: Section 4, Gallery / Selected Work styles
+   (stage-lighting version). Class names match Gallery.tsx exactly.
+   Black base mixed with oxblood, midnight teal and bronze, lit by
+   spotlight beams from above and a coloured light pool behind each
+   photograph. Mobile first: single column, then two columns from
+   768px, then a 12-column editorial grid from 960px.
+   --------------------------------------------------------------- */
+
+/* ---------- SECTION ---------- */
+.gallery {
+    --gold-light: #ecd3a6;
+    --gold: #c9a06a;
+    --wine: 120, 28, 40; /* oxblood (r, g, b) */
+    --teal: 20, 90, 96; /* midnight teal */
+    --bronze: 176, 128, 76;
+  
+    position: relative;
+    overflow: hidden;
+    color: var(--color-ivory);
+    background:
+      /* gold hairline along the very top */
+      linear-gradient(
+          to right,
+          transparent,
+          rgba(201, 160, 106, 0.75) 50%,
+          transparent
+        )
+        top / 100% 1px no-repeat,
+      /* warm stage glow at the top centre */
+      radial-gradient(
+        60rem 26rem at 50% 0%,
+        rgba(var(--bronze), 0.22),
+        transparent 70%
+      ),
+      /* colour washes spread down the long section */
+      radial-gradient(
+        44rem 34rem at 92% 20%,
+        rgba(var(--wine), 0.42),
+        transparent 68%
+      ),
+      radial-gradient(
+        44rem 34rem at 4% 46%,
+        rgba(var(--teal), 0.4),
+        transparent 68%
+      ),
+      radial-gradient(
+        46rem 36rem at 96% 72%,
+        rgba(var(--wine), 0.36),
+        transparent 68%
+      ),
+      radial-gradient(
+        44rem 32rem at 6% 94%,
+        rgba(var(--bronze), 0.24),
+        transparent 68%
+      ),
+      /* near-black base with a hint of warmth */
+      linear-gradient(180deg, #0b0a09 0%, #0e0b0b 50%, #090a0a 100%);
+  }
+  
+  /* Spotlight beams falling from above, fading as they travel down */
+  .gallery::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 62rem;
+    background:
+      /* left beam: warm gold */
+      conic-gradient(
+        from 158deg at 14% -4%,
+        transparent 0deg,
+        rgba(255, 218, 160, 0.26) 14deg,
+        transparent 28deg
+      ),
+      /* right beam: cool pearl-teal */
+      conic-gradient(
+        from 172deg at 86% -4%,
+        transparent 0deg,
+        rgba(190, 228, 232, 0.2) 14deg,
+        transparent 28deg
+      ),
+      /* centre beam: soft white-gold */
+      conic-gradient(
+        from 168deg at 50% -8%,
+        transparent 0deg,
+        rgba(255, 240, 215, 0.14) 12deg,
+        transparent 24deg
+      );
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+    filter: blur(14px);
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  
+  /* Darkened left and right edges pull the eye to the centre */
+  .gallery::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.55) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(0, 0, 0, 0.55) 100%
+    );
+    pointer-events: none;
+  }
+  
+  /* Content sits above the light layers */
+  .gallery .container {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* ---------- INTRO ---------- */
+  .gallery__intro {
+    max-width: 40rem;
+    margin-bottom: var(--space-5);
+  }
+  
+  .gallery .eyebrow {
+    color: var(--gold);
+  }
+  
+  .gallery__heading {
+    margin-top: var(--space-2);
+    font-size: var(--text-3xl);
+    max-width: 12ch;
+  }
+  
+  /* ---------- GRID (mobile) ---------- */
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+  }
+  
+  .gallery__item {
+    position: relative;
+    min-width: 0;
+  }
+  
+  /* Light pool behind each photograph, in alternating colours */
+  .gallery__item::before {
+    content: "";
+    position: absolute;
+    inset: -14% -12%;
+    z-index: -1;
+    background: radial-gradient(
+      closest-side,
+      rgba(var(--bronze), 0.38),
+      transparent 72%
+    );
+    filter: blur(22px);
+    pointer-events: none;
+  }
+  
+  .gallery__item:nth-child(3n + 2)::before {
+    background: radial-gradient(
+      closest-side,
+      rgba(var(--wine), 0.55),
+      transparent 72%
+    );
+  }
+  
+  .gallery__item:nth-child(3n + 3)::before {
+    background: radial-gradient(
+      closest-side,
+      rgba(var(--teal), 0.55),
+      transparent 72%
+    );
+  }
+  
+  /* On phones, alternate narrower items to the right for rhythm */
+  .gallery__item--tall,
+  .gallery__item--square {
+    width: 86%;
+  }
+  
+  .gallery__item--tall:nth-child(even),
+  .gallery__item--square:nth-child(even) {
+    margin-left: auto;
+  }
+  
+  /* ---------- IMAGE BUTTON ---------- */
+  .gallery__button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    color: inherit;
+  }
+  
+  /* Photograph with a hairline gold edge and a deep, lifted shadow */
+  .gallery__frame {
+    display: block;
+    width: 100%;
+    background: var(--color-ink-soft);
+    box-shadow:
+      0 0 0 1px rgba(201, 160, 106, 0.28),
+      0 36px 64px -28px rgba(0, 0, 0, 0.9);
+    transition: box-shadow var(--dur) var(--ease);
+  }
+  
+  /* Soft top light across the photograph, as if lit from above */
+  .gallery__frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 236, 205, 0.12),
+      transparent 38%
+    );
+    pointer-events: none;
+  }
+  
+  .gallery__button:hover .gallery__frame,
+  .gallery__button:focus-visible .gallery__frame {
+    box-shadow:
+      0 0 0 1px rgba(236, 211, 166, 0.7),
+      0 42px 72px -26px rgba(0, 0, 0, 0.95),
+      0 0 60px -8px rgba(201, 160, 106, 0.3);
+  }
+  
+  .gallery__image {
+    transition: transform 1.2s var(--ease), opacity var(--dur) var(--ease);
+  }
+  
+  .gallery__button:hover .gallery__image,
+  .gallery__button:focus-visible .gallery__image {
+    transform: scale(1.04);
+  }
+  
+  .gallery__caption {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    margin-top: 0.85rem;
+    font-size: var(--text-sm);
+    letter-spacing: 0.04em;
+    color: var(--color-stone-light);
+    transition: color var(--dur-fast) var(--ease);
+  }
+  
+  .gallery__button:hover .gallery__caption,
+  .gallery__button:focus-visible .gallery__caption {
+    color: var(--color-ivory);
+  }
+  
+  .gallery__caption-number {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-lg);
+    color: var(--gold);
+  }
+  
+  .gallery__note {
+    margin-top: var(--space-5);
+    font-size: var(--text-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-stone-light);
+  }
+  
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200; /* above the navbar (100) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4.5rem 1rem 1.5rem;
+    background: rgba(10, 9, 8, 0.96);
+  }
+  
+  .lightbox__figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0;
+  }
+  
+  .lightbox__image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 10rem);
+    max-height: calc(100dvh - 10rem);
+    object-fit: contain;
+  }
+  
+  .lightbox__caption {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-3);
+    width: 100%;
+    font-size: var(--text-sm);
+    letter-spacing: 0.06em;
+    color: var(--color-stone-light);
+  }
+  
+  .lightbox__btn {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: var(--color-ivory);
+    border: 1px solid var(--color-line-light);
+    background: rgba(21, 20, 18, 0.5);
+    transition: background-color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease);
+  }
+  
+  .lightbox__btn:hover {
+    background: rgba(245, 240, 232, 0.14);
+    border-color: var(--color-ivory);
+  }
+  
+  .lightbox__close {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  /* On phones the arrows sit at the bottom corners, clear of the photo */
+  .lightbox__prev,
+  .lightbox__next {
+    bottom: 0.75rem;
+  }
+  
+  .lightbox__prev {
+    left: 0.75rem;
+  }
+  
+  .lightbox__next {
+    right: 0.75rem;
+  }
+  
+  /* Leave room at the bottom for the arrows on phones */
+  @media (max-width: 767px) {
+    .lightbox {
+      padding-bottom: 4.5rem;
+    }
+  
+    .lightbox__image {
+      max-height: calc(100vh - 13rem);
+      max-height: calc(100dvh - 13rem);
+    }
+  }
+  
+  /* ---------- TABLET ---------- */
+  @media (min-width: 768px) {
+    .gallery__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: var(--space-4);
+      row-gap: var(--space-5);
+      align-items: start;
+    }
+  
+    .gallery__item--tall,
+    .gallery__item--square {
+      width: 100%;
+    }
+  
+    .gallery__item--feature,
+    .gallery__item--wide {
+      grid-column: 1 / -1;
+    }
+  
+    /* Stagger the second column downward */
+    .gallery__item--tall:nth-child(even),
+    .gallery__item--square:nth-child(even) {
+      margin-left: 0;
+      margin-top: var(--space-5);
+    }
+  
+    .lightbox__prev,
+    .lightbox__next {
+      bottom: auto;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  
+    .lightbox__prev {
+      left: 1.25rem;
+    }
+  
+    .lightbox__next {
+      right: 1.25rem;
+    }
+  
+    .lightbox {
+      padding: 4.5rem 6rem 2rem;
+    }
+  
+    .lightbox__image {
+      max-height: calc(100vh - 10rem);
+      max-height: calc(100dvh - 10rem);
+    }
+  }
+  
+  /* ---------- DESKTOP: 12-column editorial grid ---------- */
+  @media (min-width: 960px) {
+    .gallery__grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: var(--space-4);
+      row-gap: var(--space-5);
+    }
+  
+    /* Reset the tablet rules, then place each shape */
+    .gallery__item--tall:nth-child(even),
+    .gallery__item--square:nth-child(even) {
+      margin-top: 0;
+    }
+  
+    .gallery__item--feature {
+      grid-column: 1 / span 9;
+    }
+  
+    .gallery__item--wide {
+      grid-column: 4 / span 9;
+    }
+  
+    .gallery__item--tall {
+      grid-column: span 4;
+    }
+  
+    .gallery__item--square {
+      grid-column: span 4;
+    }
+  
+    /* Vertical offsets create an uneven, art-directed rhythm */
+    .gallery__item--tall:nth-child(4n + 2) {
+      margin-top: var(--space-5);
+    }
+  
+    .gallery__item--square:nth-child(4n + 1) {
+      margin-top: var(--space-4);
+    }
+  }
+  
+  /* ---------- REDUCED MOTION ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .gallery__image,
+    .gallery__frame {
+      transition: none;
+    }
+  
+    .gallery__button:hover .gallery__image,
+    .gallery__button:focus-visible .gallery__image {
+      transform: none;
+    }
+  }
