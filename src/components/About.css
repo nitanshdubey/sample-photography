@@ -1,0 +1,136 @@
+/* src/components/About.css
+   ---------------------------------------------------------------
+   MAISON AUBADE: Section 2, About the Studio styles.
+   Class names match About.tsx exactly.
+   Mobile first: one column, then two columns from 960px.
+   --------------------------------------------------------------- */
+
+/* ---------- SECTION ---------- */
+.about {
+    background: var(--color-ivory);
+    overflow: hidden; /* keeps the overlapping quote from causing sideways scroll */
+  }
+  
+  .about__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+  
+  /* ---------- PHOTOGRAPH ---------- */
+  .about__figure {
+    margin: 0;
+    width: 100%;
+    max-width: 34rem;
+  }
+  
+  .about__frame {
+    width: 100%;
+  }
+  
+  .about__image {
+    will-change: transform;
+  }
+  
+  /* ---------- TEXT ---------- */
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .about__heading {
+    max-width: 13ch;
+    margin-top: var(--space-2);
+    font-size: var(--text-3xl);
+  }
+  
+  .about__body {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 34rem;
+    margin-top: var(--space-4);
+  }
+  
+  .about__detail {
+    position: relative;
+    max-width: 34rem;
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+    font-size: var(--text-sm);
+    letter-spacing: 0.04em;
+    color: var(--color-stone);
+  }
+  
+  /* Short bronze rule above the detail line */
+  .about__detail::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3rem;
+    height: 1px;
+    background: var(--color-bronze);
+  }
+  
+  /* ---------- PULL QUOTE ---------- */
+  .about__quote {
+    margin: 0;
+    max-width: 22ch;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--text-2xl);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  
+  .about__quote p {
+    margin: 0;
+  }
+  
+  /* ---------- DESKTOP: asymmetrical two-column layout ---------- */
+  @media (min-width: 960px) {
+    .about__inner {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      column-gap: clamp(3rem, 2rem + 5vw, 7rem);
+      row-gap: 0;
+      align-items: start;
+    }
+  
+    .about__figure {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      max-width: none;
+    }
+  
+    .about__text {
+      grid-column: 2;
+      grid-row: 1;
+      padding-top: var(--space-5); /* text starts lower than the photo: editorial offset */
+    }
+  
+    /* Quote sits below the text, pulled left so it overlaps the photo edge */
+    .about__quote {
+      grid-column: 2;
+      grid-row: 2;
+      align-self: end;
+      margin-top: var(--space-5);
+      margin-left: clamp(-7rem, -4vw - 1rem, -3rem);
+      padding: var(--space-3) var(--space-4) var(--space-3) var(--space-3);
+      background: var(--color-ivory);
+      max-width: 20ch;
+      font-size: var(--text-3xl);
+      position: relative;
+      z-index: 2;
+    }
+  }
+  
+  /* ---------- REDUCED MOTION ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .about__image {
+      will-change: auto;
+    }
+  }

@@ -1,0 +1,157 @@
+/* src/components/Services.css
+   ---------------------------------------------------------------
+   MAISON AUBADE: Section 3, Services styles.
+   Class names match Services.tsx exactly.
+   Mobile first: photo above text. From 960px the rows become two
+   columns and alternate sides.
+   --------------------------------------------------------------- */
+
+/* ---------- SECTION ---------- */
+.services {
+    background: var(--color-paper);
+  }
+  
+  .services__intro {
+    max-width: 40rem;
+    margin-bottom: var(--space-5);
+  }
+  
+  .services__heading {
+    margin-top: var(--space-2);
+    max-width: 14ch;
+    font-size: var(--text-3xl);
+  }
+  
+  /* ---------- LIST ---------- */
+  .services__list {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0;
+  }
+  
+  .service {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-line);
+  }
+  
+  /* ---------- PHOTOGRAPH ---------- */
+  .service__frame {
+    width: 100%;
+    max-width: 28rem;
+  }
+  
+  .service__image {
+    transition: transform 1.2s var(--ease);
+  }
+  
+  .service:hover .service__image {
+    transform: scale(1.04);
+  }
+  
+  /* ---------- TEXT ---------- */
+  .service__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .service__number {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: var(--text-2xl);
+    line-height: 1;
+    color: var(--color-bronze-dark);
+  }
+  
+  .service__title {
+    margin-top: var(--space-2);
+    font-size: var(--text-3xl);
+    line-height: 1;
+  }
+  
+  .service__description {
+    max-width: 30rem;
+    margin-top: var(--space-3);
+    color: var(--color-stone);
+  }
+  
+  .service__detail {
+    margin-top: var(--space-2);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  
+  .service__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: var(--space-4);
+    padding-block: 0.6rem; /* comfortable touch target */
+    font-size: var(--text-xs);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+  }
+  
+  .service__link svg {
+    transition: transform var(--dur-fast) var(--ease);
+  }
+  
+  .service__link:hover svg,
+  .service__link:focus-visible svg {
+    transform: translate(2px, -2px);
+  }
+  
+  /* ---------- DESKTOP: two columns, alternating sides ---------- */
+  @media (min-width: 960px) {
+    .services__list {
+      gap: var(--space-6);
+    }
+  
+    .service {
+      grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+      column-gap: clamp(3rem, 2rem + 5vw, 7rem);
+      align-items: center;
+      padding-top: var(--space-5);
+    }
+  
+    .service__frame {
+      max-width: none;
+    }
+  
+    /* Every second row puts the photo on the right */
+    .service--flipped {
+      grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    }
+  
+    .service--flipped .service__frame {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  
+    .service--flipped .service__text {
+      grid-column: 1;
+      grid-row: 1;
+    }
+  }
+  
+  /* ---------- REDUCED MOTION ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    .service__image,
+    .service__link svg {
+      transition: none;
+    }
+  
+    .service:hover .service__image {
+      transform: none;
+    }
+  }
